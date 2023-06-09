@@ -1,8 +1,13 @@
-from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
+from django.contrib.auth.models import User
+from django.conf import settings
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView
-from .serializers import UserSerializer, GroupSerializer
+from .serializers import UserSerializer
+from rest_framework.authtoken.models import Token
 
 
 # Usuários
@@ -13,6 +18,11 @@ from .serializers import UserSerializer, GroupSerializer
 class UserCreateView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+    def create_auth_token(sender, instance=None, created=False, **kwargs):
+        if created:
+            Token.objects.create(user=instance)
 
 
 # Requisições dos dados de um usuário autenticado
@@ -27,11 +37,3 @@ class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     def get_object(self):
         return self.request.user
 
-
-# Grupos de Usuários
-
-
-class GroupViewSet(viewsets.ModelViewSet):
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    permission_classes = [IsAuthenticated]
