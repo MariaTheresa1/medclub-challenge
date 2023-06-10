@@ -1,5 +1,5 @@
-# Projeto Django API RESTful
-#### Este projeto trata-se uma API RESTful que gerencia usuários, itens e pedidos.
+# Medclub Challenge
+### Este projeto é uma API RESTful que utiliza (Django REST framework)[https://www.django-rest-framework.org/] e gerencia usuários, itens e pedidos.
 
 ## Configuração do ambiente (Windows)
 ### Instale o Python
@@ -17,7 +17,7 @@ venv\Scripts\Activate
 ```
 pip install -r requirements.txt
 ```
-### Executa o projeto localmente em http://127.0.0.1:8000/
+### Executa o projeto localmente em [localhost](http://127.0.0.1:8000/users/)
 ```
 python manage.py runserver
 ```
