@@ -1,5 +1,5 @@
 # Medclub Challenge
-### Este projeto é uma API RESTful que utiliza (Django REST framework)[https://www.django-rest-framework.org/] e gerencia usuários, itens e pedidos.
+### Este projeto é uma API RESTful que utiliza [Django REST framework](https://www.django-rest-framework.org/) e gerencia usuários, itens e pedidos.
 
 ## Configuração do ambiente (Windows)
 ### Instale o Python
